@@ -1,2 +1,95 @@
 //Heap Learning by Aditya Verma
 
+//Question: 1st
+
+Heap two types: Min heap and Max Heap 
+
+//Question: 2nd (https://leetcode.com/problems/kth-smallest-element-in-a-sorted-matrix/)
+
+//Question: 3rd (https://leetcode.com/problems/kth-largest-element-in-an-array/)
+
+class Solution {
+public:
+    int findKthLargest(vector<int>& nums, int k) {
+        priority_queue<int, vector<int>, greater<int>> minHeap;
+
+        for(const int num : nums){
+            minHeap.push(num);
+            if(minHeap.size() > k)
+            minHeap.pop();
+        }
+
+        return minHeap.top();
+    }
+};
+
+//Question: 4th (https://leetcode.com/problems/merge-k-sorted-lists/)
+
+//Question: 5th (https://leetcode.com/problems/find-k-closest-elements/)
+
+//Question: 6th (https://leetcode.com/problems/top-k-frequent-elements/)
+
+class Solution {
+public:
+    vector<int> topKFrequent(vector<int>& nums, int k) {
+        unordered_map<int, int> mp;
+        for(int i =0; i < nums.size(); i++){
+            mp[nums[i]]++;
+        }
+priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>>min_heap;
+
+        for(auto it = mp.begin();  it != mp.end(); it++){
+            min_heap.push({it->second, it->first});
+                if(min_heap.size() > k){
+                min_heap.pop();
+        }
+        }
+        vector<int> result;
+        while (!min_heap.empty()) {
+            result.push_back(min_heap.top().second);
+            min_heap.pop();
+        }
+        
+        reverse(result.begin(), result.end()); // Reverse to get elements in descending order of frequency.
+        
+        return result;
+    }
+};
+
+
+//Question: 7th (https://leetcode.com/problems/sort-characters-by-frequency/)
+
+//Question: 8th (https://leetcode.com/problems/k-closest-points-to-origin/)
+
+//Question: 9th (https://practice.geeksforgeeks.org/problems/minimum-cost-of-ropes-1587115620/1?page=1&category[]=Heap&sortBy=submissions)
+
+class Solution
+{
+    public:
+    //Function to return the minimum cost of connecting the ropes.
+    long long minCost(long long arr[], long long n) {
+        // Your code here
+        priority_queue<long long, vector <long long>, greater <long long> > pq;
+        
+        for(int i =0; i<n; i++){
+            pq.push(arr[i]);
+            
+        }
+        long long cost = 0;
+        
+        while(pq.size() > 1){
+        long long a = pq.top();
+        pq.pop();
+        long long b= pq.top();
+        pq.pop();
+        
+        long long sum = a+b;
+        cost +=sum;
+        
+        pq.push(sum);
+    }
+return cost;
+    }
+};
+
+//Question: 10th (https://practice.geeksforgeeks.org/problems/sum-of-elements-between-k1th-and-k2th-smallest-elements3133/1?page=1&category[]=Heap&sortBy=submissions)
