@@ -59,7 +59,64 @@ priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>>m
 
 //Question: 7th (https://leetcode.com/problems/sort-characters-by-frequency/)
 
+class Solution {
+public:
+    string frequencySort(string s) {
+        // int max_heap;
+        unordered_map<char, int> mp;
+        for(auto i:s){
+            mp[i]++;
+        }
+
+        priority_queue<pair<int, char>> pq;
+        for(auto i:mp){
+           pq.push({i.second, i.first});
+        }
+
+        int j = 0;
+        while(!pq.empty()){
+            auto i = pq.top(); 
+            int temp = i.first;
+            pq.pop();
+            while(temp--){
+                s[j++] = i.second;
+            }
+        }
+
+return s;
+    }
+};
+
 //Question: 8th (https://leetcode.com/problems/k-closest-points-to-origin/)
+
+class Solution {
+public:
+    vector<vector<int>> kClosest(vector<vector<int>>& points, int k) {
+        
+priority_queue<pair<int, pair<int, int>>> max_heap;
+
+        for(int i = 0; i < points.size(); i++){
+            max_heap.push({points[i][0] * points[i][0] + points[i][1] * points[i][1], {points[i][0], points[i][1]}});
+
+// If the size of the max_heap exceeds k, remove the farthest  
+
+            if(max_heap.size()>k){
+                max_heap.pop();
+            }
+        }
+        // Extract k closest points from max_heap
+        vector<vector<int>> result;
+            while(!max_heap.empty()){
+                pair<int, int> p = max_heap.top().second;
+                result.push_back({p.first, p.second});
+                max_heap.pop();
+            }
+            return result;
+        }
+
+    
+};
+
 
 //Question: 9th (https://practice.geeksforgeeks.org/problems/minimum-cost-of-ropes-1587115620/1?page=1&category[]=Heap&sortBy=submissions)
 
