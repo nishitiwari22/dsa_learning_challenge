@@ -1,0 +1,14 @@
+class Solution {
+public:
+    int findNonMinOrMax(vector<int>& nums) {
+        sort(nums.begin(), nums.end()); // Sorting the given vector in ascending order
+
+        // If the size of the vector is 2 or 1, there is no second element, so return -1
+        if (nums.size() == 2 || nums.size() == 1) {
+            return -1;
+        }
+
+        // Return the second element of the sorted vector
+        return nums[1];
+    }
+};
